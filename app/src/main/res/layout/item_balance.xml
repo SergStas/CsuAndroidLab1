@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_balance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="24dp"
+        app:layout_constraintTop_toTopOf="parent@id/lichniy_kabinet"
+        android:layout_marginTop="30dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp" >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_ruble"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="22dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/vash_balance"
+                app:layout_constraintBottom_toBottomOf="@id/ls">
+
+                <ImageView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:padding="8dp"
+                    android:background="#eee"
+                    android:src="@drawable/ic_currency_ruble_black_24dp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/vash_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/card_ruble"
+                android:text="Ваш баланc"
+                style="@style/Text"
+                android:layout_marginStart="12dp" />
+
+            <TextView
+                android:id="@+id/ls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/vash_balance"
+                app:layout_constraintStart_toEndOf="@id/card_ruble"
+                android:layout_marginStart="12dp"
+                style="@style/Text"
+                android:text="ЛC: 11010010"
+                android:textSize="18sp"
+                android:textColor="@color/grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/vash_balance"
+                app:layout_constraintBottom_toBottomOf="@id/ls"
+                android:text="100.42 ₽"
+                style="@style/Text"
+                android:textSize="18sp"
+                android:textColor="#88b" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_ruble"
+                android:text="К оплате за cентябрь: 0.00P"
+                style="@style/Text"
+                android:textSize="14sp"
+                android:textColor="@color/grey"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ПОПОЛНИТЬ"
+                style="@style/Text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="14sp"
+                android:textColor="#d55" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

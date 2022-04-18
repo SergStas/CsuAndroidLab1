@@ -1,13 +1,12 @@
 package com.example.csuandroidlab1
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.csuandroidlab1.databinding.ActivityMainBinding
 import com.example.csuandroidlab1.databinding.RvTarifBinding
 
@@ -65,16 +64,3 @@ class Adapter: ListAdapter<Item, VH>(
     override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(getItem(position))
 }
 
-data class Item(
-    val title: String,
-    val subtitle: String,
-    val price: Int,
-)
-
-class VH(private val binding: RvTarifBinding): RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: Item) {
-        binding.nazvanie.text = item.title
-        binding.skorost.text = item.subtitle
-        binding.cena.text = "${item.price} ₽"
-    }
-}

@@ -7,6 +7,9 @@
         <entry key="..\:/projects/GoodToolsLab/CsuAndroidLab1/app/src/main/res/drawable/ic_currency_ruble_black_24dp.xml" value="0.1395" />
         <entry key="..\:/projects/GoodToolsLab/CsuAndroidLab1/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.201" />
         <entry key="..\:/projects/GoodToolsLab/CsuAndroidLab1/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/projects/GoodToolsLab/CsuAndroidLab1/app/src/main/res/layout/item_balance.xml" value="0.36666666666666664" />
+        <entry key="..\:/projects/GoodToolsLab/CsuAndroidLab1/app/src/main/res/layout/item_tariff.xml" value="0.36666666666666664" />
+        <entry key="..\:/projects/GoodToolsLab/CsuAndroidLab1/app/src/main/res/layout/item_user.xml" value="0.36666666666666664" />
         <entry key="..\:/projects/GoodToolsLab/CsuAndroidLab1/app/src/main/res/layout/rv_tarif.xml" value="0.33" />
       </map>
     </option>
