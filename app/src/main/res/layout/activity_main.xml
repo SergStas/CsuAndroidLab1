@@ -6,11 +6,21 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     android:background="#fafafa"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/lichniy_kabinet"
@@ -72,27 +82,26 @@
                     app:layout_constraintStart_toEndOf="@id/card_ruble"
                     android:layout_marginStart="12dp"
                     style="@style/Text"
-                    android:text="ЛC: 11010010"
                     android:textSize="18sp"
                     android:textColor="@color/grey" />
 
                 <TextView
+                    android:id="@+id/balance_sum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/vash_balance"
                     app:layout_constraintBottom_toBottomOf="@id/ls"
-                    android:text="100.42 ₽"
                     style="@style/Text"
                     android:textSize="18sp"
                     android:textColor="#88b" />
 
                 <TextView
+                    android:id="@+id/k_oplate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/card_ruble"
-                    android:text="К оплате за cентябрь: 0.00P"
                     style="@style/Text"
                     android:textSize="14sp"
                     android:textColor="@color/grey"
@@ -170,12 +179,13 @@
                     android:src="@drawable/ic_account_circle_black_24dp" />
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toEndOf="@id/chelovek"
                     app:layout_constraintTop_toTopOf="@id/chelovek"
                     app:layout_constraintBottom_toBottomOf="@id/chelovek"
-                    android:text="Иванов Иван Иваныч"
+
                     style="@style/Text.Grey"
                     android:layout_marginStart="12dp" />
 
@@ -189,6 +199,7 @@
                     android:src="@drawable/ic_home_black_24dp" />
 
                 <TextView
+                    android:id="@+id/adres"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toEndOf="@id/chelovek"
@@ -196,7 +207,6 @@
                     app:layout_constraintBottom_toBottomOf="@id/domik"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="20dp"
-                    android:text="Cахалин, ул. Пушкина, д. Колотушкина"
                     style="@style/Text.Grey"
                     android:layout_marginStart="12dp" />
 

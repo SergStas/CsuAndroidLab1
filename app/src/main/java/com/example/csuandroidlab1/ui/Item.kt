@@ -1,4 +1,4 @@
-package com.example.csuandroidlab1
+package com.example.csuandroidlab1.ui
 
 data class Item(
     val title: String,

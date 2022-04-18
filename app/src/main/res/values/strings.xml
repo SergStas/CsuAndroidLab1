@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">CsuAndroidLab1</string>
     <string name="tv_lichniy_kabinet">Личный кабинет</string>
+    <string name="k_oplate">К оплате за cентябрь: %.2fP</string>
+    <string name="ls">ЛC: %s</string>
 </resources>

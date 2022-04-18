@@ -1,4 +1,4 @@
-package com.example.csuandroidlab1
+package com.example.csuandroidlab1.ui
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.csuandroidlab1.databinding.RvTarifBinding
