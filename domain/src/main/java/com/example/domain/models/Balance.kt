@@ -1,4 +1,4 @@
-package com.example.csuandroidlab1.network.models
+package com.example.domain.models
 
 data class Balance(
     val accNum: Int,

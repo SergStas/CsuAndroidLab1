@@ -1,4 +1,4 @@
-package com.example.csuandroidlab1.network.retrorfit
+package com.example.network.retrorfit
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

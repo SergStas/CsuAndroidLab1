@@ -1,96 +1,63 @@
 package com.example.csuandroidlab1.ui
 
 import android.os.Bundle
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.csuandroidlab1.App
 import com.example.csuandroidlab1.R
 import com.example.csuandroidlab1.databinding.ActivityMainBinding
-import com.example.csuandroidlab1.network.models.Balance
-import com.example.csuandroidlab1.network.models.Tariff
-import com.example.csuandroidlab1.network.models.UserInfo
-import com.example.csuandroidlab1.network.retrorfit.ApiProvider
-import com.example.csuandroidlab1.network.retrorfit.RetrofitClient
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.csuandroidlab1.viewmodels.AbstractMainViewModel
+import com.example.csuandroidlab1.viewmodels.ViewModelFactory
+import com.example.domain.models.Tariff
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
+    @Inject lateinit var factory: ViewModelFactory
+
     private lateinit var adapter: Adapter
     private lateinit var binding: ActivityMainBinding
 
-    private val api = ApiProvider(RetrofitClient()).getApi()
+    private val viewModel by viewModels<AbstractMainViewModel> { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        inject()
         setView()
         setAdapter()
-        load()
+        subscribe()
     }
 
-    private fun load() {
-        MainScope().launch {
-            binding.loading.isVisible = true
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshData()
+    }
 
-            val tariffsCallback = object: Callback<List<Tariff>> {
-                override fun onResponse(call: Call<List<Tariff>>, response: Response<List<Tariff>>) {
-                    val tariffs = response.body() ?: onFailure(call, Exception())
-                    val items = (tariffs as List<Tariff>).map(::mapTariffToItem)
-                    setTariffs(items)
-                    binding.loading.isVisible = false
-                }
+    private fun inject() {
+        App.appComponent.inject(this)
+    }
 
-                override fun onFailure(call: Call<List<Tariff>>, t: Throwable) {
-                    Toast.makeText(this@MainActivity, "Bad internet connection", Toast.LENGTH_LONG).show()
-                    binding.loading.isVisible = false
-                }
+    private fun subscribe() {
+        viewModel.isLoading.observe(this) {
+            binding.loading.isVisible = it
+        }
+        viewModel.tariffs.observe(this) { list ->
+            setTariffs(list.map { item -> mapTariffToItem(item) })
+        }
+        viewModel.balance.observe(this) {
+            with(binding) {
+                balanceSum.text = it.balance.toString()
+                kOplate.text = getString(R.string.k_oplate).format(it.nextPay)
+                ls.text = getString(R.string.ls).format(it.accNum)
             }
-
-            val balanceCallback = object: Callback<List<Balance>> {
-                override fun onResponse(
-                    call: Call<List<Balance>>,
-                    response: Response<List<Balance>>,
-                ) {
-                    val balance = response.body()?.get(0) ?: onFailure(call, Exception())
-                    val casted = balance as Balance
-                    with(binding) {
-                        balanceSum.text = casted.balance.toString()
-                        kOplate.text = getString(R.string.k_oplate).format(casted.nextPay)
-                        ls.text = getString(R.string.ls).format(casted.accNum)
-                        loading.isVisible = false
-                    }
-                }
-
-                override fun onFailure(call: Call<List<Balance>>, t: Throwable) {
-                    Toast.makeText(this@MainActivity, "Bad internet connection", Toast.LENGTH_LONG).show()
-                    binding.loading.isVisible = false
-                }
+        }
+        viewModel.userInfo.observe(this) {
+            with(binding) {
+                name.text = getString(R.string.name_ph).format(it.firstName, it.lastName)
+                adres.text = it.address
             }
-
-            val userCallback = object: Callback<List<UserInfo>> {
-                override fun onResponse(call: Call<List<UserInfo>>, response: Response<List<UserInfo>>) {
-                    val user = response.body()?.get(0) ?: onFailure(call, Exception())
-                    val casted = (user as UserInfo)
-                    with(binding) {
-                        name.text = "${casted.firstName} ${casted.lastName}"
-                        adres.text = user.address
-                        loading.isVisible = false
-                    }
-                }
-
-                override fun onFailure(call: Call<List<UserInfo>>, t: Throwable) {
-                    Toast.makeText(this@MainActivity, "Bad internet connection", Toast.LENGTH_LONG).show()
-                    binding.loading.isVisible = false
-                }
-            }
-
-            api.getTariffs().enqueue(tariffsCallback)
-            api.getBalance().enqueue(balanceCallback)
-            api.getUserInfo().enqueue(userCallback)
         }
     }
 
@@ -101,9 +68,8 @@ class MainActivity : AppCompatActivity() {
             price = tariff.cost,
         )
 
-    private fun setTariffs(list: List<Item>) {
+    private fun setTariffs(list: List<Item>) =
         adapter.submitList(list)
-    }
 
     private fun setView() {
         binding = ActivityMainBinding.inflate(layoutInflater)
