@@ -22,7 +22,7 @@ import javax.inject.Singleton
 
 @Module
 class AppModule {
-    @Provides @Singleton
+    @Provides
     fun provideViewModelFactory(
         tariffsUseCase: IGetTariffsUseCase,
         balanceUseCase: IGetBalanceUseCase,
@@ -30,39 +30,39 @@ class AppModule {
     ): ViewModelFactory =
         ViewModelFactory(tariffsUseCase, userInfoUseCase, balanceUseCase)
 
-    @Provides @Singleton
+    @Provides
     fun provideRetrofitClient(): RetrofitClient =
         RetrofitClient()
 
-    @Provides @Singleton
+    @Provides
     fun provideApiProvider(client: RetrofitClient): ApiProvider =
         ApiProvider(client)
 
-    @Provides @Singleton
+    @Provides
     fun provideApi(apiProvider: ApiProvider): IApi =
         apiProvider.getApi()
 
-    @Provides @Singleton
+    @Provides
     fun provideUserInfoRepo(apiProvider: ApiProvider): IUserInfoRepository =
         UserInfoRepository(apiProvider)
 
-    @Provides @Singleton
+    @Provides
     fun provideBalanceRepo(apiProvider: ApiProvider): IBalanceRepository =
         BalanceRepository(apiProvider)
 
-    @Provides @Singleton
+    @Provides
     fun provideTariffRepo(apiProvider: ApiProvider): ITariffRepository =
         TariffRepository(apiProvider)
 
-    @Provides @Singleton
+    @Provides
     fun provideUserInfoUseCase(repo: IUserInfoRepository): IGetUserInfoUseCase =
         GetUserInfoUseCase(repo)
 
-    @Provides @Singleton
+    @Provides
     fun provideBalanceUseCase(repo: IBalanceRepository): IGetBalanceUseCase =
         GetBalanceUseCase(repo)
 
-    @Provides @Singleton
+    @Provides
     fun provideTariffUseCase(repo: ITariffRepository): IGetTariffsUseCase =
         GetTariffsUseCase(repo)
 }
