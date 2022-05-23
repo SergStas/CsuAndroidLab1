@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.csuandroidlab1.databinding.RvTarifBinding
 
-class Adapter: ListAdapter<Item, VH>(
+class Adapter: ListAdapter<Item, ItemViewHolder>(
     object : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean =
             oldItem == newItem
@@ -14,12 +14,12 @@ class Adapter: ListAdapter<Item, VH>(
             oldItem == newItem
     }
 ) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH =
-        VH(RvTarifBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
+        ItemViewHolder(RvTarifBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false,
         ))
 
-    override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(getItem(position))
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) = holder.bind(getItem(position))
 }

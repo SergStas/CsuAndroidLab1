@@ -16,4 +16,5 @@ rootProject.name = "CsuAndroidLab1"
 include ':app'
 include ':domain'
 include ':network'
+include ':asdaffdgfdg'
 include ':data'

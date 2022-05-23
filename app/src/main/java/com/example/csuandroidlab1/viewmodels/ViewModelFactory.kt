@@ -2,16 +2,16 @@ package com.example.csuandroidlab1.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.domain.usecases.balance.IGetBalanceUseCase
-import com.example.domain.usecases.gettariffs.IGetTariffsUseCase
-import com.example.domain.usecases.getuserinfo.IGetUserInfoUseCase
+import javax.inject.Inject
+import javax.inject.Provider
 
-class ViewModelFactory(
-    private val tariffsUseCase: IGetTariffsUseCase,
-    private val userInfoUseCase: IGetUserInfoUseCase,
-    private val balanceUseCase: IGetBalanceUseCase,
-): ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T =
-        MainViewModel(tariffsUseCase, userInfoUseCase, balanceUseCase) as T
+@Suppress("UNCHECKED_CAST")
+class ViewModelFactory @Inject constructor(
+    private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        val viewModelProvider = viewModels[modelClass]
+            ?: throw IllegalStateException("viewModel $modelClass not found")
+        return viewModelProvider.get() as T
+    }
 }

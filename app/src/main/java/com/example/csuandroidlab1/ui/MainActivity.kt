@@ -5,17 +5,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.csuandroidlab1.App
 import com.example.csuandroidlab1.R
 import com.example.csuandroidlab1.databinding.ActivityMainBinding
 import com.example.csuandroidlab1.viewmodels.AbstractMainViewModel
-import com.example.csuandroidlab1.viewmodels.ViewModelFactory
+import com.example.csuandroidlab1.factory
 import com.example.domain.models.Tariff
-import javax.inject.Inject
 
 class MainActivity: AppCompatActivity() {
-    @Inject lateinit var factory: ViewModelFactory
-
     private lateinit var adapter: Adapter
     private lateinit var binding: ActivityMainBinding
 
@@ -23,8 +19,6 @@ class MainActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        inject()
         setView()
         setAdapter()
         subscribe()
@@ -33,10 +27,6 @@ class MainActivity: AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.refreshData()
-    }
-
-    private fun inject() {
-        App.appComponent.inject(this)
     }
 
     private fun subscribe() {
@@ -66,6 +56,7 @@ class MainActivity: AppCompatActivity() {
             title = tariff.title,
             subtitle = tariff.desc,
             price = tariff.cost,
+            onClick = { viewModel.delete(tariff) },
         )
 
     private fun setTariffs(list: List<Item>) =

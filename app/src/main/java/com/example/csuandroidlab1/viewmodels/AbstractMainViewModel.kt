@@ -13,4 +13,5 @@ abstract class AbstractMainViewModel: ViewModel() {
     abstract val isLoading: LiveData<Boolean>
 
     abstract fun refreshData()
+    abstract fun delete(tariff: Tariff)
 }

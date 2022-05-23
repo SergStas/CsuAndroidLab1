@@ -38,14 +38,16 @@ android {
 
 dependencies {
     implementation project(":domain")
-    implementation project(":data")
+    implementation project(':data')
     implementation project(":network")
 
+    implementation 'androidx.room:room-ktx:2.4.2'
+    kapt 'androidx.room:room-compiler:2.4.2'
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
     implementation 'com.google.dagger:dagger:2.40.1'
+    kapt 'com.google.dagger:dagger-compiler:2.40.1'
     implementation 'javax.inject:javax.inject:1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    kapt 'com.google.dagger:dagger-compiler:2.40.1'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC2'

@@ -1,12 +1,16 @@
 package com.example.csuandroidlab1.di
 
-import com.example.csuandroidlab1.ui.MainActivity
+import com.example.csuandroidlab1.viewmodels.ViewModelFactory
 import dagger.Component
-import javax.inject.Singleton
 
-@Singleton @Component(modules = [
+@Component(modules = [
     AppModule::class,
+    DataModule::class,
+    NetworkModule::class,
+    UsecaseModule::class,
+    ViewModelModule::class,
 ])
 interface IAppComponent {
-    fun inject(activity: MainActivity)
+    fun factory(): ViewModelFactory
 }
+
